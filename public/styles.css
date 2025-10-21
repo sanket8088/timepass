@@ -1,0 +1,664 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    /* Smooth scrolling for mobile */
+    -webkit-overflow-scrolling: touch;
+}
+
+.container {
+    max-width: 800px;
+    width: 100%;
+    position: relative;
+}
+
+/* Floating hearts animation */
+.hearts-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.heart {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: rgba(255, 255, 255, 0.3);
+    transform: rotate(45deg);
+    animation: float 15s infinite;
+}
+
+.heart:before,
+.heart:after {
+    content: "";
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+}
+
+.heart:before {
+    top: -10px;
+    left: 0;
+}
+
+.heart:after {
+    left: 10px;
+    top: 0;
+}
+
+.heart:nth-child(1) {
+    left: 10%;
+    animation-delay: 0s;
+}
+
+.heart:nth-child(2) {
+    left: 30%;
+    animation-delay: 3s;
+}
+
+.heart:nth-child(3) {
+    left: 50%;
+    animation-delay: 6s;
+}
+
+.heart:nth-child(4) {
+    left: 70%;
+    animation-delay: 9s;
+}
+
+.heart:nth-child(5) {
+    left: 90%;
+    animation-delay: 12s;
+}
+
+@keyframes float {
+    0% {
+        bottom: -20px;
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    90% {
+        opacity: 1;
+    }
+    100% {
+        bottom: 100vh;
+        opacity: 0;
+    }
+}
+
+header {
+    text-align: center;
+    color: white;
+    margin-bottom: 30px;
+    position: relative;
+    z-index: 1;
+}
+
+header h1 {
+    font-size: 3em;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.subtitle {
+    font-size: 1.2em;
+    opacity: 0.9;
+}
+
+.card {
+    background: white;
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    position: relative;
+    z-index: 1;
+}
+
+.options-section h2 {
+    color: #667eea;
+    margin-bottom: 25px;
+    text-align: center;
+    font-size: 1.8em;
+}
+
+.option-group {
+    margin-bottom: 30px;
+}
+
+.option-group label {
+    display: block;
+    font-size: 1.1em;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 12px;
+}
+
+.button-group {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.option-btn {
+    padding: 12px 20px;
+    border: 2px solid #e0e0e0;
+    background: white;
+    border-radius: 12px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    /* Prevent text selection on buttons */
+    -webkit-user-select: none;
+    user-select: none;
+    /* Remove tap highlight on mobile */
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* Hover effects only for devices that support hover */
+@media (hover: hover) {
+    .option-btn:hover {
+        border-color: #667eea;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
+    }
+
+    .generate-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 25px rgba(245, 87, 108, 0.5);
+    }
+}
+
+/* Touch feedback for mobile */
+.option-btn:active:not(.active) {
+    transform: scale(0.98);
+    border-color: #667eea;
+}
+
+.option-btn.active {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-color: #667eea;
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+.generate-btn {
+    width: 100%;
+    padding: 18px;
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 1.3em;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 30px;
+    transition: all 0.3s ease;
+    box-shadow: 0 6px 20px rgba(245, 87, 108, 0.4);
+    /* Prevent text selection */
+    -webkit-user-select: none;
+    user-select: none;
+    /* Remove tap highlight on mobile */
+    -webkit-tap-highlight-color: transparent;
+}
+
+.generate-btn:active {
+    transform: scale(0.98);
+}
+
+.loading-spinner {
+    text-align: center;
+    padding: 40px 20px;
+    margin-top: 30px;
+}
+
+.spinner {
+    width: 50px;
+    height: 50px;
+    margin: 0 auto 20px;
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #667eea;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.loading-spinner p {
+    color: #667eea;
+    font-size: 1.1em;
+    font-style: italic;
+}
+
+.pickup-line-display {
+    margin-top: 30px;
+    padding: 30px;
+    background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+    border-radius: 15px;
+    position: relative;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.quote-icon {
+    font-size: 4em;
+    color: rgba(118, 75, 162, 0.3);
+    position: absolute;
+    top: -10px;
+    left: 20px;
+    font-family: Georgia, serif;
+}
+
+.quote-icon-end {
+    font-size: 4em;
+    color: rgba(118, 75, 162, 0.3);
+    position: absolute;
+    bottom: -40px;
+    right: 20px;
+    font-family: Georgia, serif;
+}
+
+#pickupLineText {
+    font-size: 1.5em;
+    line-height: 1.6;
+    color: #333;
+    text-align: center;
+    font-style: italic;
+    padding: 20px 10px;
+    font-weight: 500;
+}
+
+.error-message {
+    margin-top: 30px;
+    padding: 20px;
+    background: #ffebee;
+    border-left: 4px solid #f44336;
+    border-radius: 8px;
+    color: #c62828;
+    animation: fadeIn 0.5s ease;
+}
+
+footer {
+    text-align: center;
+    color: white;
+    margin-top: 30px;
+    font-size: 1.1em;
+    opacity: 0.9;
+    position: relative;
+    z-index: 1;
+}
+
+/* Reset Button */
+.reset-btn {
+    position: absolute;
+    top: 80px;
+    right: 20px;
+    padding: 10px 20px;
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    border-radius: 25px;
+    font-size: 0.9em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 100;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+@media (hover: hover) {
+    .reset-btn:hover {
+        background: rgba(255, 255, 255, 0.3);
+        border-color: rgba(255, 255, 255, 0.8);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+}
+
+.reset-btn:active {
+    transform: scale(0.95);
+}
+
+/* Intro Form Styles */
+.intro-form-container {
+    animation: fadeIn 0.5s ease;
+}
+
+.intro-form-container header h1 {
+    font-size: 2.2em;
+}
+
+.intro-form-container .subtitle {
+    font-size: 1em;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 0.95em;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 8px;
+}
+
+.form-group input[type="text"] {
+    width: 100%;
+    padding: 12px 14px;
+    border: 2px solid #e0e0e0;
+    border-radius: 12px;
+    font-size: 0.95em;
+    transition: all 0.3s ease;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.form-group input[type="text"]:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.checkbox-group {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    padding: 10px 14px;
+    border: 2px solid #e0e0e0;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: white;
+    font-weight: 500;
+}
+
+.checkbox-label:hover {
+    border-color: #667eea;
+    background: rgba(102, 126, 234, 0.05);
+}
+
+.checkbox-label input[type="checkbox"] {
+    margin-right: 10px;
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+    accent-color: #667eea;
+}
+
+.checkbox-label input[type="checkbox"]:checked + span {
+    color: #667eea;
+    font-weight: 600;
+}
+
+.checkbox-label span {
+    flex: 1;
+    font-size: 0.95em;
+}
+
+footer {
+    text-align: center;
+    color: white;
+    margin-top: 30px;
+    font-size: 1.1em;
+    opacity: 0.9;
+    position: relative;
+    z-index: 1;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+        align-items: flex-start;
+        padding-top: 20px;
+    }
+
+    header h1 {
+        font-size: 2.2em;
+    }
+    
+    .subtitle {
+        font-size: 1em;
+    }
+    
+    .card {
+        padding: 20px;
+        border-radius: 15px;
+    }
+
+    .options-section h2 {
+        font-size: 1.5em;
+        margin-bottom: 20px;
+    }
+
+    .option-group {
+        margin-bottom: 20px;
+    }
+
+    .option-group label {
+        font-size: 1em;
+        margin-bottom: 10px;
+    }
+    
+    .button-group {
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+    }
+    
+    .option-btn {
+        padding: 14px 16px;
+        font-size: 1em;
+        /* Better touch targets for mobile */
+        min-height: 48px;
+    }
+
+    .generate-btn {
+        padding: 16px;
+        font-size: 1.2em;
+        margin-top: 20px;
+        /* Better touch target */
+        min-height: 56px;
+    }
+
+    .pickup-line-display {
+        padding: 20px;
+        margin-top: 20px;
+    }
+
+    .quote-icon {
+        font-size: 2.5em;
+        top: -5px;
+        left: 10px;
+    }
+
+    .quote-icon-end {
+        font-size: 2.5em;
+        bottom: -25px;
+        right: 10px;
+    }
+    
+    #pickupLineText {
+        font-size: 1.1em;
+        padding: 15px 5px;
+        line-height: 1.5;
+    }
+
+    .loading-spinner {
+        padding: 30px 15px;
+        margin-top: 20px;
+    }
+
+    .loading-spinner p {
+        font-size: 1em;
+    }
+
+    footer {
+        font-size: 0.95em;
+        margin-top: 20px;
+        padding-bottom: 10px;
+    }
+
+    header {
+        margin-bottom: 20px;
+    }
+}
+
+/* Extra small devices */
+@media (max-width: 480px) {
+    body {
+        padding: 8px;
+        padding-top: 15px;
+    }
+
+    header h1 {
+        font-size: 1.8em;
+    }
+
+    .subtitle {
+        font-size: 0.9em;
+    }
+
+    .card {
+        padding: 16px;
+    }
+
+    .options-section h2 {
+        font-size: 1.3em;
+    }
+
+    .button-group {
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+    }
+
+    .option-btn {
+        padding: 12px 14px;
+        font-size: 0.95em;
+    }
+
+    .generate-btn {
+        font-size: 1.1em;
+        padding: 14px;
+    }
+
+    #pickupLineText {
+        font-size: 1em;
+    }
+
+    .quote-icon,
+    .quote-icon-end {
+        font-size: 2em;
+    }
+
+    .intro-form-container header h1 {
+        font-size: 1.8em;
+    }
+
+    .intro-form-container .subtitle {
+        font-size: 0.9em;
+    }
+
+    .form-group label {
+        font-size: 0.9em;
+    }
+
+    .form-group input[type="text"] {
+        padding: 10px 12px;
+        font-size: 0.9em;
+    }
+
+    .checkbox-label {
+        padding: 9px 11px;
+        font-size: 0.9em;
+    }
+
+    .checkbox-label input[type="checkbox"] {
+        width: 16px;
+        height: 16px;
+    }
+
+    .reset-btn {
+        top: 60px;
+        right: 10px;
+        padding: 8px 16px;
+        font-size: 0.85em;
+    }
+}
+
+/* Landscape orientation for phones */
+@media (max-height: 600px) and (orientation: landscape) {
+    body {
+        align-items: flex-start;
+        padding-top: 10px;
+    }
+
+    header {
+        margin-bottom: 15px;
+    }
+
+    header h1 {
+        font-size: 1.5em;
+        margin-bottom: 5px;
+    }
+
+    .subtitle {
+        font-size: 0.85em;
+    }
+
+    .card {
+        padding: 15px;
+    }
+
+    .option-group {
+        margin-bottom: 15px;
+    }
+
+    footer {
+        margin-top: 15px;
+    }
+}
+

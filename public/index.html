@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta name="theme-color" content="#667eea">
+    <meta name="description" content="A romantic pickup line generator - create sweet, funny, and charming pickup lines">
+    <title>💕 Pickup Lines For You</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="hearts-background">
+            <div class="heart"></div>
+            <div class="heart"></div>
+            <div class="heart"></div>
+            <div class="heart"></div>
+            <div class="heart"></div>
+        </div>
+
+        <!-- Intro Form (shown first time) -->
+        <div id="introForm" class="intro-form-container">
+            <header>
+                <h1>💕 Welcome, Beautiful 💕</h1>
+                <p class="subtitle">Let me get to know you first...</p>
+            </header>
+
+            <div class="card">
+                <form id="userInfoForm">
+                    <div class="form-group">
+                        <label for="userName">What's your name? ✨</label>
+                        <input type="text" id="userName" name="userName" placeholder="Enter your name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="nickName">What would you love to be called? 💖</label>
+                        <input type="text" id="nickName" name="nickName" placeholder="Baby, Sweetheart, etc." required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>What makes you smile? 😊 (Select all that apply)</label>
+                        <div class="checkbox-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="preferences" value="compliments">
+                                <span>Sweet Compliments</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="preferences" value="humor">
+                                <span>Making Me Laugh</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="preferences" value="romance">
+                                <span>Romantic Gestures</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="preferences" value="adventure">
+                                <span>Adventure & Excitement</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="preferences" value="thoughtfulness">
+                                <span>Thoughtful Surprises</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="preferences" value="passion">
+                                <span>Passion & Intimacy</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="generate-btn">
+                        Let's Get Started 💕
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Main App (shown after form) -->
+        <div id="mainApp" style="display: none;">
+            <button id="resetBtn" class="reset-btn" title="Start Over">
+                🔄 Reset
+            </button>
+            
+            <header>
+                <h1 id="greeting">💕 Sweet Pickup Lines 💕</h1>
+                <p class="subtitle">Let me make you smile with a custom pickup line</p>
+            </header>
+
+        <div class="card">
+            <div class="options-section">
+                <h2>Choose Your Style</h2>
+                
+                <div class="option-group">
+                    <label>Style:</label>
+                    <div class="button-group">
+                        <button class="option-btn active" data-option="style" data-value="sweet">Sweet 🍭</button>
+                        <button class="option-btn" data-option="style" data-value="funny">Funny 😄</button>
+                        <button class="option-btn" data-option="style" data-value="poetic">Poetic 📝</button>
+                        <button class="option-btn" data-option="style" data-value="cheesy">Cheesy 🧀</button>
+                    </div>
+                </div>
+
+                <div class="option-group">
+                    <label>Mood:</label>
+                    <div class="button-group">
+                        <button class="option-btn active" data-option="mood" data-value="romantic">Romantic 💖</button>
+                        <button class="option-btn" data-option="mood" data-value="playful">Playful 😊</button>
+                        <button class="option-btn" data-option="mood" data-value="passionate">Passionate 🔥</button>
+                        <button class="option-btn" data-option="mood" data-value="gentle">Gentle 🌸</button>
+                    </div>
+                </div>
+
+                <div class="option-group">
+                    <label>Spiciness:</label>
+                    <div class="button-group">
+                        <button class="option-btn active" data-option="spiciness" data-value="mild">Mild 🌼</button>
+                        <button class="option-btn" data-option="spiciness" data-value="medium">Medium 🌶️</button>
+                        <button class="option-btn" data-option="spiciness" data-value="spicy">Spicy 🔥</button>
+                        <button class="option-btn" data-option="spiciness" data-value="naughty">Naughty 😈</button>
+                    </div>
+                </div>
+            </div>
+
+            <button id="generateBtn" class="generate-btn">
+                Generate Pickup Line ✨
+            </button>
+
+            <div id="loadingSpinner" class="loading-spinner" style="display: none;">
+                <div class="spinner"></div>
+                <p>Crafting something special...</p>
+            </div>
+
+            <div id="pickupLineDisplay" class="pickup-line-display" style="display: none;">
+                <div class="quote-icon">"</div>
+                <p id="pickupLineText"></p>
+                <div class="quote-icon-end">"</div>
+            </div>
+
+            <div id="errorMessage" class="error-message" style="display: none;"></div>
+        </div>
+
+            <footer>
+                <p>Made with ❤️ for someone special</p>
+            </footer>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
